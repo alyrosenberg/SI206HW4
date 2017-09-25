@@ -6,7 +6,7 @@ import unittest
 
 ##COMMENT YOUR CODE WITH:
 # Section Day/Time: Section 002 Thursday 8:30 AM
-# People you worked with: Abby
+# People you worked with: Abby, Rachel
 
 ######### DO NOT CHANGE PROVIDED CODE #########
 ### Below is the same cards.py code you saw in lecture.
