@@ -128,111 +128,95 @@ if __name__ == "__main__":
 
 
 
-
-
 ##**##**##**##@##**##**##**## # DO NOT CHANGE OR DELETE THIS COMMENT LINE -- we use it for grading your file
 ###############################################
 
 ### Write unit tests below this line for the cards code above.
 
+class test(unittest.TestCase):
+
 # 1. Test that if you create a card with rank 12, its rank will be "Queen"
-card1 = Card(2,12)
-if card1.rank == "Queen":
-	print ("Good. New card you ranked will be a Queen")
-else:
-	print ("Didn't work. Your card is not a Queen")
-	
+	def test_1(self):
+		self.assertEqual(str(Card(2,12)).split(' ')[0], 'Queen')
+		
 
 # 2. Test that if you create a card with rank 1, its rank will be "Ace"
-card2 = Card(0,1)
-if card2.rank == "Ace":
-	print ("Good. New card you ranked will be a Ace")
-else:
-	print ("Didn't work. Your card is not a Ace")
+	def test_2(self):
+		self.assertEqual(str(Card(0,1)).split(' ')[0], 'Ace')
+	
 	
 # 3. Test that if you create a card instance with rank 3, its rank will be 3
-card3 = Card(1,3)
-if card3.rank == 3:
-	print ("Good. New card you ranked will be a 3")
-else:
-	print ("Didn't work. Your card is not a 3")
+	def test_3(self):
+		self.assertEqual(str(Card(1,3)).split(' ')[0], '3')
+
 	
 # 4. Test that if you create a card instance with suit 1, it will be suit "Clubs"
-card4 = Card(1,12)
-if card4.suit == "Clubs":
-	print ("Good. New card you ranked is a Club.")
-else:
-	print ("Didn't work. Your card is not a Club.")
-
+	def test_4(self):
+		self.assertEqual(str(Card(1,12)).split(' ')[2], 'Clubs')
+	
+		
 # 5. Test that if you create a card instance with suit 2, it will be suit "Hearts"
-card4 = Card(2,12)
-if card4.suit == "Hearts":
-	print ("Good. New card you ranked is a Heart.")
-else:
-	print ("Didn't work. Your card is not a Heart.")
+	def test_5(self):
+		self.assertEqual(str(Card(2,12)).split(' ')[2], 'Hearts')
+		
 # 6. Test that if you create a card instance, it will have access to a variable suit_names
 # that contains the list ["Diamonds","Clubs","Hearts","Spades"]
-card6 = Card(1,2)
-if card6.suit_names == ["Diamonds","Clubs","Hearts","Spades"]:
-	print ("Good. Your card has the correct list of suits.")
-else:
-	print ("Your card does not have the right list of suits")
+	def test_6(self):
+		card6 = Card(1,2)
+		self.assertEqual(card6.suit_names, ["Diamonds","Clubs","Hearts","Spades"])
+			
 
 # 7. Test that if you invoke the __str__ method of a card instance that is created with 
 # suit=2, rank=7, it returns the string "7 of Hearts"
-card7 = Card(2,7)
-if card7.__str__() == "7 of Hearts":
-	print ("Good. You created the 7 of Hearts.")
-else:
-	print ("wrong. you did not get the seven of Hearts.")
+	def test_7(self):
+		card7 = Card(2,7)
+		self.assertEqual(card7.__str__(), '7 of Hearts')
+			
 # 8. Test that if you create a deck instance, it will have 52 cards in its cards instance variable
-Deck1 = Deck()
-if len(Deck1.cards) == int(52):
-	print ("Good. Your deck contains 52 cards.")
-else:
-	print ("Whoops! Your deck does not contain 52 cards.")
+	def test_8(self):
+		Deck1 = Deck()
+		self.assertEqual(len(Deck1.cards), int(52))
+			
 
 # 9. Test that if you invoke the pop_card method on a deck, it will return a card instance.
-Deck2 = Deck()
-Card9 = Card(1,3)
-if type(Deck2.pop_card()) == type(Card9):
-	print ("Good. The pop_card method returned a card instance.")
-else:
-	print ("Whoops! Your pop_card method did not return a card instance.")
+	def test_9(self):
+		Deck2 = Deck()
+		Card9 = Card(1,3)
+		self.assertEqual(type(Deck2.pop_card()), type(Card9))
+			
 
 
-# 10 Test that the return value of the play_war_game function is a tuple with three elements, 
-# the first of which is a string. (This will probably require multiple test methods!)
-tup = ('x','y',1)
-if type(play_war_game(testing=True)) == type(tup):
-	if type(tup[0]) == str and len(tup) == int(3):
-		print ("Good. Your play_war_game function has 3 elements, the first which is a string")
-else:
-	print ("Whoops. Either your play_war_game function is not a tuple or the first element is not a string")
+# # 10 Test that the return value of the play_war_game function is a tuple with three elements, 
+# # the first of which is a string. (This will probably require multiple test methods!)
+	def test_10(self):
+		tup = ('x','y',1)
+		self.assertEqual(type(play_war_game(testing=True)), type(tup))
+		self.assertEqual(type(tup[0]), str) 
+		self.assertEqual(len(tup), int(3))
+				
 
-# 11 and 12)  Write at least 2 additional tests (not repeats of the above described tests). 
-# Make sure to include a descriptive message in these two so we can easily see what you are testing!
+# # 11 and 12)  Write at least 2 additional tests (not repeats of the above described tests). 
+# # Make sure to include a descriptive message in these two so we can easily see what you are testing!
  
- #I am testing to see that there are 26 cards that are hearts or clubs.
-Deck3 = Deck()
-count = 0
-for card in Deck3.cards:
-	if card.suit == "Hearts" or card.suit == "Clubs":
-		count += 1
-if count == 26:
-	print ("Good! 26 of the cards in your deck are Hearts or Clubs.")
-else:
-	print ("Whoops! Something went wrong.")
+# I am testing to see that there are 26 cards that are hearts or clubs.
+	def test_11(self):
+		deck3 = Deck()
+		count = 0
+		for card in deck3.cards:
+			if card.suit == "Hearts" or card.suit == "Clubs":
+				count += 1
+		self.assertEqual(count, 26)
 
-#testing to see that after using pop_card function there is one less card in the deck
-Deck4 = Deck()
-x = len(Deck4.cards)
-lengthdeck = int(x)
-Deck4.pop_card()
-if len(Deck4.cards) == lengthdeck - 1:
-	print ("Good! After using the pop_card function there is one less card in the deck.")
-else:
-	print ("Whoops! Your pop_card method did not work properly.")
+ 				
+
+# #testing to see that after using pop_card function there is one less card in the deck
+	def test_12(self):
+		Deck4 = Deck()
+		x = len(Deck4.cards)
+		lengthdeck = int(x)
+		Deck4.pop_card()
+		self.assertEqual(len(Deck4.cards), (lengthdeck - 1))
+		
 
 
 
